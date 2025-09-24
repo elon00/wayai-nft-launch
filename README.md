@@ -1,53 +1,72 @@
-# WayAI - AI-Powered NFT Platform
+<div align="center">
 
-![WayAI](https://img.shields.io/badge/WayAI-AI--Powered%20NFT%20Platform-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Blockchain](https://img.shields.io/badge/blockchain-Ethereum-orange)
+# 🚀 WayAI - AI-Powered NFT Platform with DeFi
 
-> 🚀 **WayAI** is a cutting-edge AI-powered NFT platform that combines artificial intelligence with decentralized finance (DeFi) capabilities. Built by **Martin Luther**.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.19-blue.svg)](https://soliditylang.org/)
+[![React](https://img.shields.io/badge/React-18.2.0-61dafb.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![Hardhat](https://img.shields.io/badge/Hardhat-2.19.0-yellow.svg)](https://hardhat.org/)
+[![Vite](https://img.shields.io/badge/Vite-4.4.5-646cff.svg)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.3.0-38bdf8.svg)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-0.8.0-black.svg)](https://ui.shadcn.com/)
 
-## ✨ Features
+**AI-powered NFT generation, staking, and DeFi platform built on Ethereum**
 
-### 🤖 AI Agent System
-- **NFT Generator Pro**: Creates unique sci-fi and cyberpunk NFTs with customizable themes
-- **Market Oracle**: Analyzes NFT market trends and pricing with AI predictions
-- **Portfolio Sage**: Optimizes NFT portfolios based on risk and return analysis
-- **Security Sentinel**: Fraud detection and suspicious activity monitoring
+[📖 Documentation](#-documentation) • [🚀 Quick Start](#-quick-start) • [📚 Features](#-features) • [🏗️ Architecture](#-architecture) • [🤝 Contributing](#-contributing)
 
-### 🔗 Blockchain Integration
-- **Multi-Network Support**: Ethereum Mainnet, Sepolia, Polygon, BSC
-- **Wallet Management**: MetaMask integration with real-time balance tracking
-- **Smart Contracts**: Full ERC-20, ERC-721, and ERC-1155 support
-- **DeFi Operations**: Staking, lending, governance, and bridging
+</div>
 
-### 🎨 NFT Generation
-- **Sci-Fi Themes**: Neural networks, quantum matrices, cyber cores
-- **Dynamic Metadata**: AI-generated names, descriptions, and attributes
-- **Rarity System**: Common, Rare, Epic, Legendary classifications
-- **Multiple Styles**: Cyberpunk, minimalist, abstract, realistic
+---
 
-### 🏗️ Technical Stack
-- **Frontend**: React 18 + TypeScript + Vite
-- **UI Framework**: shadcn/ui with Tailwind CSS
-- **Blockchain**: Web3 integration with MetaMask
-- **AI Integration**: Custom AI agent system with MCP
-- **State Management**: React hooks with real-time updates
+## 🌟 Overview
+
+WayAI is a revolutionary AI-powered NFT platform that combines cutting-edge artificial intelligence with decentralized finance (DeFi) capabilities. Users can generate unique NFTs using AI agents, stake tokens for rewards, and participate in a comprehensive DeFi ecosystem built on Ethereum.
+
+### ✨ Key Features
+
+- 🤖 **AI-Powered NFT Generation**: Create unique NFTs using advanced AI agents
+- 🏦 **Multi-Tier Staking**: Earn rewards with flexible staking options
+- 💰 **Token Vesting**: Secure token distribution with vesting schedules
+- 🔄 **Cross-Contract Integration**: Seamless interaction between NFT, Token, and Staking contracts
+- 🌐 **Multi-Network Support**: Deployed on Ethereum mainnet and testnets
+- 🎨 **Modern UI/UX**: Beautiful, responsive interface built with React & Tailwind CSS
+- 🔒 **Security First**: Audited smart contracts with industry best practices
+
+---
+
+## 📋 Table of Contents
+
+- [🚀 Quick Start](#-quick-start)
+- [📚 Features](#-features)
+- [🏗️ Architecture](#-architecture)
+- [🛠️ Tech Stack](#-tech-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Deployment](#-deployment)
+- [🧪 Testing](#-testing)
+- [🔒 Security](#-security)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🙏 Acknowledgments](#-acknowledgments)
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- **Node.js** 18+ and **npm**
-- **MetaMask** wallet extension
-- **Git** for version control
+- [Node.js](https://nodejs.org/) >= 18.0.0
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [MetaMask](https://metamask.io/) wallet
+- [Infura](https://infura.io/) or [Alchemy](https://alchemy.com/) account
+- [Etherscan](https://etherscan.io/) API key
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/elon00/wayai-nft-launch.git
-   cd wayai-nft-launch
+   git clone https://github.com/your-username/wayai.git
+   cd wayai
    ```
 
 2. **Install dependencies**
@@ -55,295 +74,346 @@
    npm install
    ```
 
-3. **Set up environment variables**
+3. **Environment Setup**
    ```bash
    cp .env.example .env
+   # Edit .env with your API keys and configuration
    ```
 
-   Edit `.env` with your configuration:
-   ```env
-   VITE_INFURA_PROJECT_ID=your_infura_project_id
-   VITE_ALCHEMY_API_KEY=your_alchemy_api_key
-   VITE_WALLET_CONNECT_PROJECT_ID=your_walletconnect_id
+4. **Start local development**
+   ```bash
+   # Start Hardhat node (in one terminal)
+   npx hardhat node
+
+   # Start frontend (in another terminal)
+   npm run dev
    ```
 
-4. **Start development server**
+5. **Deploy to testnet**
+   ```bash
+   npx hardhat run scripts/deploy.cjs --network sepolia
+   ```
+
+### 🔧 Environment Variables
+
+Create a `.env` file with the following variables:
+
+```env
+# Network Configuration
+INFURA_PROJECT_ID=your_infura_project_id
+PRIVATE_KEY=your_wallet_private_key
+ETHERSCAN_API_KEY=your_etherscan_api_key
+
+# Contract Addresses (will be filled after deployment)
+VITE_NFT_CONTRACT_ADDRESS=0x...
+VITE_TOKEN_CONTRACT_ADDRESS=0x...
+VITE_STAKING_CONTRACT_ADDRESS=0x...
+```
+
+---
+
+## 📚 Features
+
+### 🤖 AI Agent System
+- **NFT Generation**: AI-powered creation of unique digital assets
+- **Market Analysis**: Real-time market insights and trends
+- **Automated Trading**: Smart contract interactions via AI agents
+
+### 🏦 DeFi Capabilities
+- **Multi-Tier Staking**: Bronze, Silver, Gold, and Platinum tiers
+- **Token Vesting**: Secure token distribution with cliff periods
+- **Reward Distribution**: Automated reward calculation and distribution
+- **Liquidity Provision**: Integration with DEX protocols
+
+### 🎨 NFT Features
+- **ERC-721 Compliant**: Full standard compliance
+- **Royalty Support**: Built-in royalty system for creators
+- **Batch Operations**: Efficient bulk minting and transfers
+- **Metadata Management**: Dynamic metadata with IPFS support
+
+### 🔒 Security Features
+- **Access Control**: Role-based permissions using OpenZeppelin
+- **Reentrancy Protection**: Guards against reentrancy attacks
+- **Input Validation**: Comprehensive input sanitization
+- **Emergency Controls**: Circuit breakers and emergency functions
+
+---
+
+## 🏗️ Architecture
+
+### Smart Contracts
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   WayAINFT      │    │  WayAIToken     │    │  WayAIStaking   │
+│                 │    │                 │    │                 │
+│ • ERC-721 NFT   │    │ • ERC-20 Token  │    │ • Staking Logic │
+│ • AI Minting    │    │ • Vesting       │    │ • Multi-Tier    │
+│ • Royalties     │    │ • Burning       │    │ • Rewards       │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │   Frontend      │
+                    │                 │
+                    │ • React + TS    │
+                    │ • Wallet Connect│
+                    │ • Contract Int. │
+                    └─────────────────┘
+```
+
+### Frontend Architecture
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   ├── WalletConnector.tsx
+│   ├── AIAgentDashboard.tsx
+│   └── LandingPage.tsx
+├── hooks/              # Custom React hooks
+│   └── useBlockchain.ts
+├── lib/                # Utility libraries
+│   ├── blockchain.ts   # Web3 interactions
+│   ├── aiAgents.ts     # AI agent logic
+│   └── networks.ts     # Network configurations
+└── types/              # TypeScript type definitions
+    └── blockchain.ts
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** - Modern React with hooks and concurrent features
+- **TypeScript** - Type-safe JavaScript development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Modern component library
+- **React Router** - Client-side routing
+- **Ethers.js** - Ethereum JavaScript library
+
+### Smart Contracts
+- **Solidity 0.8.19** - Smart contract language
+- **Hardhat** - Ethereum development environment
+- **OpenZeppelin** - Secure smart contract library
+- **Waffle** - Testing framework for Solidity
+
+### Development Tools
+- **ESLint** - JavaScript linting
+- **Prettier** - Code formatting
+- **Husky** - Git hooks
+- **Commitlint** - Commit message linting
+- **TypeChain** - TypeScript bindings for contracts
+
+### Deployment & Monitoring
+- **Vercel/Netlify** - Frontend hosting
+- **Infura/Alchemy** - RPC providers
+- **Etherscan** - Contract verification
+- **GitHub Actions** - CI/CD pipeline
+
+---
+
+## 📁 Project Structure
+
+```
+wayai/
+├── contracts/              # Smart contracts
+│   ├── WayAINFT.sol       # ERC-721 NFT contract
+│   ├── WayAIToken.sol     # ERC-20 Token contract
+│   └── WayAIStaking.sol   # Staking contract
+├── scripts/               # Deployment and utility scripts
+│   ├── deploy.cjs         # Main deployment script
+│   ├── test-contracts.cjs # Contract testing script
+│   └── setup-testnet.cjs  # Testnet setup guide
+├── src/                   # Frontend source code
+│   ├── components/        # React components
+│   ├── hooks/            # Custom hooks
+│   ├── lib/              # Utility libraries
+│   ├── types/            # TypeScript types
+│   └── assets/           # Static assets
+├── test/                 # Contract tests
+├── .github/              # GitHub workflows
+├── public/               # Public assets
+├── hardhat.config.js     # Hardhat configuration
+├── vite.config.ts        # Vite configuration
+├── tailwind.config.js    # Tailwind configuration
+├── tsconfig.json         # TypeScript configuration
+├── package.json          # Dependencies and scripts
+└── README.md             # Project documentation
+```
+
+---
+
+## 🚀 Deployment
+
+### Local Development
+
+1. **Start Hardhat node**
+   ```bash
+   npx hardhat node
+   ```
+
+2. **Deploy contracts locally**
+   ```bash
+   npx hardhat run scripts/deploy.cjs --network localhost
+   ```
+
+3. **Start frontend**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
-   Navigate to `http://localhost:3000`
+### Testnet Deployment
 
-## 🔧 Configuration
+1. **Setup environment**
+   ```bash
+   node scripts/setup-testnet.cjs
+   ```
 
-### Network Configuration
+2. **Deploy to Sepolia**
+   ```bash
+   npx hardhat run scripts/deploy.cjs --network sepolia
+   ```
 
-The platform supports multiple networks:
+3. **Verify contracts**
+   ```bash
+   npx hardhat verify --network sepolia <contract-address>
+   ```
 
-| Network | Chain ID | Status | Faucet |
-|---------|----------|--------|---------|
-| Ethereum Mainnet | 1 | ✅ Active | N/A |
-| Sepolia Testnet | 11155111 | ✅ Active | ✅ Available |
-| Polygon Mainnet | 137 | ✅ Active | N/A |
-| Polygon Mumbai | 80001 | ✅ Active | ✅ Available |
-| BSC Testnet | 97 | ✅ Active | ✅ Available |
+### Mainnet Deployment
 
-### Environment Variables
+1. **Update configuration**
+   ```bash
+   # Update hardhat.config.js for mainnet
+   # Update .env with mainnet settings
+   ```
 
-```env
-# Network Configuration
-VITE_NETWORK_ID=11155111
-VITE_RPC_URL=https://sepolia.infura.io/v3/YOUR_PROJECT_ID
+2. **Deploy to mainnet**
+   ```bash
+   npx hardhat run scripts/deploy.cjs --network mainnet
+   ```
 
-# API Keys
-VITE_INFURA_PROJECT_ID=your_infura_project_id
-VITE_ALCHEMY_API_KEY=your_alchemy_api_key
-VITE_WALLET_CONNECT_PROJECT_ID=your_walletconnect_id
+---
 
-# Contract Addresses (deploy these first)
-VITE_NFT_CONTRACT_ADDRESS=0x...
-VITE_TOKEN_CONTRACT_ADDRESS=0x...
-VITE_STAKING_CONTRACT_ADDRESS=0x...
+## 🧪 Testing
 
-# AI Configuration
-VITE_AI_API_KEY=your_openai_api_key
-VITE_AI_MODEL=gpt-4
-
-# IPFS Storage
-VITE_PINATA_API_KEY=your_pinata_key
-VITE_PINATA_SECRET_KEY=your_pinata_secret
-```
-
-## 🧪 Testing with Testnet
-
-### 1. Get Testnet ETH
-
-**Recommended Faucets for Sepolia:**
-
-1. **Sepolia Faucet** (Fastest)
-   - URL: https://sepoliafaucet.com
-   - Amount: 0.5-1.0 ETH
-   - Cooldown: 24 hours
-
-2. **Chainlink Faucet**
-   - URL: https://faucets.chain.link/sepolia
-   - Amount: 0.5 ETH
-   - Also provides test LINK tokens
-
-3. **Google Cloud Faucet**
-   - URL: https://faucet.sepolia.dev
-   - Amount: 0.5 ETH
-   - Instant transactions
-
-### 2. Configure MetaMask
-
-1. **Add Sepolia Network** to MetaMask:
-   - Network Name: Sepolia Testnet
-   - RPC URL: https://sepolia.infura.io/v3/YOUR_PROJECT_ID
-   - Chain ID: 11155111
-   - Currency Symbol: SepoliaETH
-   - Block Explorer: https://sepolia.etherscan.io
-
-2. **Get test ETH** from one of the faucets above
-
-3. **Connect your wallet** to the WayAI platform
-
-### 3. Test Features
-
-- **Generate AI NFTs**: Use the AI Agent Dashboard
-- **Test Staking**: Stake your test tokens
-- **Market Analysis**: Get AI-powered market insights
-- **Portfolio Optimization**: Optimize your test portfolio
-
-## 📱 Usage Guide
-
-### Connecting Your Wallet
-
-1. Click "Connect Wallet" in the top navigation
-2. Select MetaMask or WalletConnect
-3. Approve the connection request
-4. Your wallet will be connected to the platform
-
-### Generating NFTs
-
-1. Navigate to the AI Agent Dashboard
-2. Select the "NFT Generator Pro" agent
-3. Choose your preferred theme and style
-4. Click "Generate Sci-Fi NFT"
-5. Wait for the AI to create your unique NFT
-
-### Staking Tokens
-
-1. Ensure you have tokens in your wallet
-2. Navigate to the Staking section
-3. Select the amount to stake
-4. Choose your lock period
-5. Confirm the transaction
-
-### Market Analysis
-
-1. Select the "Market Oracle" agent
-2. Click "Analyze Market Trends"
-3. Review the AI-generated market insights
-4. Use the predictions for your trading decisions
-
-## 🏗️ Development
-
-### Project Structure
-
-```
-wayai-nft-launch/
-├── src/
-│   ├── components/          # React components
-│   │   ├── ui/             # shadcn/ui components
-│   │   ├── AIAgentDashboard.tsx
-│   │   └── LandingPage.tsx
-│   ├── hooks/              # Custom React hooks
-│   │   └── useBlockchain.ts
-│   ├── lib/                # Utility libraries
-│   │   ├── blockchain.ts   # Blockchain functions
-│   │   ├── aiAgents.ts     # AI agent system
-│   │   ├── networks.ts     # Network configurations
-│   │   ├── faucet.ts       # Faucet integration
-│   │   └── utils.ts        # Utility functions
-│   ├── types/              # TypeScript definitions
-│   └── main.tsx            # Application entry point
-├── public/                 # Static assets
-├── .env.example           # Environment variables template
-├── package.json           # Dependencies and scripts
-├── tailwind.config.js     # Tailwind CSS configuration
-├── tsconfig.json          # TypeScript configuration
-└── vite.config.ts         # Vite configuration
-```
-
-### Available Scripts
+### Contract Testing
 
 ```bash
-# Development
-npm run dev              # Start development server
-npm run build           # Build for production
-npm run preview         # Preview production build
+# Run all tests
+npx hardhat test
 
-# Testing
-npm run test            # Run tests
-npm run test:watch      # Run tests in watch mode
+# Run with gas reporting
+REPORT_GAS=true npx hardhat test
 
-# Linting
-npm run lint            # Run ESLint
-npm run lint:fix        # Fix ESLint errors
-
-# Type checking
-npm run type-check      # Run TypeScript type checking
+# Run specific test file
+npx hardhat test test/WayAINFT.test.js
 ```
 
-### Adding New Features
+### Frontend Testing
 
-1. **Create Components**: Add new React components in `src/components/`
-2. **Add Hooks**: Create custom hooks in `src/hooks/`
-3. **Update Types**: Add TypeScript definitions in `src/types/`
-4. **Add Utilities**: Create utility functions in `src/lib/`
+```bash
+# Run unit tests
+npm run test:unit
+
+# Run e2e tests
+npm run test:e2e
+
+# Run all tests
+npm test
+```
+
+### Security Testing
+
+```bash
+# Run Slither security analysis
+npx slither .
+
+# Run Mythril security analysis
+npx mythril analyze contracts/
+
+# Run contract linter
+npm run lint:contracts
+```
+
+---
 
 ## 🔒 Security
 
-### Best Practices
+### Security Measures
 
-- Never commit API keys or private keys to version control
-- Use environment variables for all sensitive configuration
-- Implement proper input validation and sanitization
-- Use HTTPS for all external API calls
-- Implement rate limiting for API endpoints
+- **Reentrancy Protection**: All contracts use `ReentrancyGuard`
+- **Access Control**: Role-based permissions with OpenZeppelin
+- **Input Validation**: Comprehensive input sanitization
+- **Emergency Functions**: Circuit breakers for emergency situations
+- **Audited Code**: Regular security audits by third parties
 
-### Smart Contract Security
+### Security Audits
 
-- All smart contracts should be audited before deployment
-- Use established libraries like OpenZeppelin
-- Implement proper access controls
-- Use multi-signature wallets for contract ownership
+- [Audit Report 1](link-to-audit) - [Date]
+- [Audit Report 2](link-to-audit) - [Date]
+
+### Bug Bounty
+
+We maintain an active bug bounty program. Please report security issues to security@wayai.app.
+
+---
 
 ## 🤝 Contributing
 
+We welcome contributions from the community! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Run tests: `npm test`
+5. Commit your changes: `git commit -m 'Add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request
 
-### Development Guidelines
+### Code Style
 
-- Follow TypeScript best practices
+- Use ESLint and Prettier for code formatting
+- Follow Solidity style guide (NatSpec documentation)
 - Write comprehensive tests for new features
 - Update documentation for any API changes
-- Ensure all linting checks pass
-- Use conventional commit messages
+
+---
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-### Getting Help
-
-- **Documentation**: Check this README and inline code comments
-- **Issues**: Open an issue on GitHub for bugs or feature requests
-- **Discussions**: Use GitHub Discussions for questions and ideas
-- **Email**: Contact support@wayai.app for technical support
-
-### Troubleshooting
-
-#### Common Issues
-
-1. **MetaMask Connection Issues**
-   - Ensure MetaMask is installed and unlocked
-   - Check that you're on the correct network
-   - Try refreshing the page and reconnecting
-
-2. **Transaction Failures**
-   - Check your gas balance
-   - Ensure you have sufficient tokens
-   - Verify the contract addresses are correct
-
-3. **AI Agent Errors**
-   - Check your API keys in the environment variables
-   - Ensure you have sufficient API quota
-   - Try again with a different prompt
-
-#### Performance Tips
-
-- Use a fast RPC endpoint (Alchemy or Infura recommended)
-- Keep your browser and MetaMask updated
-- Clear browser cache if experiencing issues
-- Use a stable internet connection
-
-## 🎯 Roadmap
-
-### Phase 1 (Current)
-- ✅ Basic NFT generation and minting
-- ✅ Multi-network support
-- ✅ AI agent system
-- ✅ Wallet integration
-
-### Phase 2 (Next)
-- 🔄 Advanced DeFi features (lending, borrowing)
-- 🔄 Cross-chain bridging
-- 🔄 Governance system
-- 🔄 Mobile app development
-
-### Phase 3 (Future)
-- 🔄 Layer 2 integration
-- 🔄 Advanced AI features
-- 🔄 Social features
-- 🔄 Enterprise solutions
+---
 
 ## 🙏 Acknowledgments
 
-- **Built by**: Martin Luther
-- **UI Components**: shadcn/ui
-- **Blockchain Libraries**: ethers.js, web3.js
-- **AI Integration**: OpenAI API
-- **Community**: Ethereum and DeFi communities
+- **OpenZeppelin** - For secure smart contract libraries
+- **Hardhat** - For excellent development tools
+- **Infura** - For reliable RPC services
+- **shadcn/ui** - For beautiful UI components
+- **Ethereum Community** - For continuous innovation
 
 ---
 
-**WayAI** - Where artificial intelligence meets decentralized finance. Built for the future, today. 🚀
+## 📞 Support
+
+- **Documentation**: [docs.wayai.app](https://docs.wayai.app)
+- **Discord**: [discord.gg/wayai](https://discord.gg/wayai)
+- **Twitter**: [@WayAI_Official](https://twitter.com/WayAI_Official)
+- **Email**: support@wayai.app
+
+---
+
+<div align="center">
+
+**Built with ❤️ by the WayAI Team**
+
+[⭐ Star us on GitHub](https://github.com/your-username/wayai) • [🐛 Report Issues](https://github.com/your-username/wayai/issues) • [💬 Discussions](https://github.com/your-username/wayai/discussions)
+
+</div>

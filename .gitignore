@@ -15,25 +15,40 @@ yarn-error.log*
 # Build outputs
 dist/
 build/
-.next/
 out/
+.next/
+.vercel/
+.netlify/
 
-# IDE
+# Hardhat artifacts
+artifacts/
+cache/
+deployments/
+typechain/
+typechain-types/
+
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# OS
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
 # Logs
-logs
+logs/
 *.log
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
@@ -41,9 +56,10 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 *.lcov
+.nyc_output/
 
 # nyc test coverage
-.nyc_output
+.nyc_output/
 
 # Dependency directories
 jspm_packages/
@@ -73,41 +89,146 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Gatsby files
-.cache/
-public
-
-# Storybook build outputs
-.out
-.storybook-out
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
 
 # Temporary folders
 tmp/
 temp/
 
-# Editor directories and files
-.vscode/
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Local development
+.local
 
-# Wallet files
-*.json.bak
-wallet.json
+# Testing
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Hardhat verification
+verification/
+
+# Contract deployment artifacts
+deployments/localhost/
+deployments/sepolia/
+deployments/mainnet/
+
+# Wallet files (NEVER commit these!)
+*.json (if contains private keys)
 keystore/
+wallet.json
 
-# Blockchain
-artifacts/
-cache/
-deployments/
+# Gas reporter
+gas-reporter-output.json
+
+# Slither output
+slither-output/
+
+# Mythril output
+mythril-output/
+
+# Security audit reports (keep these private)
+audit-reports/private/
+
+# Documentation build
+docs/build/
+docs/.vuepress/dist/
+
+# Backup files
+*.bak
+*.backup
+
+# Lock files (optional - some teams prefer to commit them)
+# package-lock.json
+# yarn.lock
+
+# Vercel
+.vercel
+
+# Netlify
+.netlify/
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Local development overrides
+config/local.json
+config/development.json
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# API keys and secrets (if not in .env)
+secrets.json
+config/secrets.json
+
+# Docker
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+
+# Kubernetes
+*.yaml
+*.yml (if contains secrets)
+
+# Terraform
+*.tfstate
+*.tfvars
+.terraform/
+
+# AWS
+.aws/
+
+# Google Cloud
+.gcloud/
+
+# Azure
+.azure/
+
+# CI/CD
+.github/workflows/cache/
+.github/workflows/logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.tmp.js
+*.tmp.json
+
+# Editor directories and files
+.vscode/settings.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS specific
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Project specific
+# Add any project-specific files that should be ignored

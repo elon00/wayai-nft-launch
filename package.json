@@ -16,11 +16,20 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "@openzeppelin/contracts": "^4.9.0",
+    "@openzeppelin/hardhat-upgrades": "^3.9.1",
     "@types/node": "^24.5.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/sinon-chai": "^3.2.12",
     "@vitejs/plugin-react": "^4.1.1",
     "autoprefixer": "^10.4.16",
+    "chai": "^6.0.1",
+    "ethereum-waffle": "^4.0.10",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.22.0",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
@@ -46,5 +55,6 @@
     "contracts:compile": "npx hardhat compile",
     "contracts:deploy": "npx hardhat run scripts/deploy.js --network sepolia",
     "contracts:test": "npx hardhat test"
-  }
+  },
+  "type": "module"
 }

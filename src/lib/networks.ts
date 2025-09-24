@@ -21,6 +21,27 @@ export interface NetworkConfig {
 }
 
 export const NETWORKS: Record<number, NetworkConfig> = {
+  // Local Hardhat Network (Development)
+  31337: {
+    chainId: 31337,
+    name: 'localhost',
+    displayName: 'Local Hardhat',
+    rpcUrl: 'http://127.0.0.1:8545',
+    blockExplorer: '',
+    nativeCurrency: {
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    isTestnet: true,
+    features: {
+      staking: true,
+      lending: true,
+      governance: true,
+      bridge: true,
+    },
+  },
+
   // Ethereum Mainnet
   1: {
     chainId: 1,
@@ -166,7 +187,7 @@ export const NETWORKS: Record<number, NetworkConfig> = {
 };
 
 // Default network configuration
-export const DEFAULT_NETWORK = NETWORKS[11155111]; // Sepolia
+export const DEFAULT_NETWORK = NETWORKS[31337]; // Local Hardhat Network
 
 // Network utilities
 export const getNetworkByChainId = (chainId: number): NetworkConfig | undefined => {
