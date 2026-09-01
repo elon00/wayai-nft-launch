@@ -23,7 +23,7 @@
     "@types/node": "^24.5.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
-    "@types/sinon-chai": "^3.2.12",
+    "@types/sinon-chai": "^4.0.0",
     "@vitejs/plugin-react": "^4.1.1",
     "autoprefixer": "^10.4.16",
     "chai": "^6.0.1",
