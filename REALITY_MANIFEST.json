@@ -1,0 +1,41 @@
+{
+  "system": "WAYAI-NFT-PLATFORM",
+  "version": "1.0.0",
+  "status": "EVIDENCE_BASED_PQC_PROTOCOL",
+  "description": "AI-Powered NFT Platform with NIST FIPS 203/204 Post-Quantum Lattice Provenance and Multi-Chain Contracts",
+  "truthTaxonomy": {
+    "cryptographicCore": "PURE_TYPESCRIPT_PQC_EXECUTION",
+    "kemScheme": "NIST_FIPS_203_ML_KEM_768",
+    "signatureScheme": "NIST_FIPS_204_ML_DSA_65",
+    "nftProvenance": "ML_DSA_65_LATTICE_SIGNED_METADATA",
+    "simulationEliminated": true,
+    "weakestLinkGate": "H=0.60 (Pending external 3rd-party audit)",
+    "auditFirmStatus": "PENDING_EXTERNAL_AUDIT"
+  },
+  "subsystems": [
+    {
+      "name": "PQCCrypto",
+      "path": "src/lib/pqcCrypto.ts",
+      "status": "VERIFIED_NIST_FIPS_203_204",
+      "wire": {
+        "kemPublicKeyBytes": 1184,
+        "kemSecretKeyBytes": 2400,
+        "kemCiphertextBytes": 1088,
+        "kemSharedSecretBytes": 32,
+        "dsaPublicKeyBytes": 1952,
+        "dsaSecretKeyBytes": 4032,
+        "dsaSignatureBytes": 3309
+      }
+    },
+    {
+      "name": "SmartContracts",
+      "path": "contracts/WayAINFT.sol",
+      "status": "VERIFIED_ERC721_UPGRADEABLE"
+    },
+    {
+      "name": "AIAgentLayer",
+      "path": "src/lib/aiAgents.ts",
+      "status": "VERIFIED_AGENT_ORCHESTRATION"
+    }
+  ]
+}
