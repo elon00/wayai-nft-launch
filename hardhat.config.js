@@ -1,5 +1,5 @@
-import "@nomicfoundation/hardhat-ethers";
-import "@nomicfoundation/hardhat-verify";
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers";
 
 /** @type import("hardhat/config").HardhatUserConfig */
 export default {
@@ -11,37 +11,21 @@ export default {
     hardhat: {},
     localhost: { url: "http://127.0.0.1:8545" },
     sepolia: {
-      url: process.env.INFURA_PROJECT_ID
-        ? `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
-        : "",
-      accounts: process.env.PRIVATE_KEY
-        ? [process.env.PRIVATE_KEY]
-        : [],
+      url: process.env.INFURA_PROJECT_ID ? `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}` : "",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 20000000000,
     },
     mainnet: {
-      url: process.env.INFURA_PROJECT_ID
-        ? `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
-        : "",
+      url: process.env.INFURA_PROJECT_ID ? `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}` : "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 20000000000,
     },
     polygon: {
-      url: process.env.INFURA_PROJECT_ID
-        ? `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
-        : "",
+      url: process.env.INFURA_PROJECT_ID ? `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}` : "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
   },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
-  },
+  gasReporter: { enabled: process.env.REPORT_GAS !== undefined, currency: "USD" },
   etherscan: { apiKey: process.env.ETHERSCAN_API_KEY },
-  paths: {
-    artifacts: "./artifacts",
-    cache: "./cache",
-    sources: "./contracts",
-    tests: "./test",
-  },
+  paths: { artifacts: "./artifacts", cache: "./cache", sources: "./contracts", tests: "./test" },
 };
