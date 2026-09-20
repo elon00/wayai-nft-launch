@@ -1,0 +1,50 @@
+name: WayAI Dependency Auto-Heal
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+
+jobs:
+  repair-lockfile:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Rebuild corrupted or stale lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            node -e 'JSON.parse(require("fs").readFileSync("package-lock.json","utf8"));' || rm -f package-lock.json
+          fi
+          npm install --package-lock-only --ignore-scripts
+
+      - name: Commit repaired lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- package-lock.json; then
+            echo "Lockfile already healthy."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "ci: auto-heal package lockfile [skip ci]"
+          git push
