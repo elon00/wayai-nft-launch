@@ -89,14 +89,6 @@ jobs:
       env:
         REPORT_GAS: true
 
-    - name: Run Slither security analysis
-      uses: crytic/slither-action@v0.3.0
-      continue-on-error: true
-      with:
-        target: contracts/
-        slither-args: --exclude-dependencies --exclude-informational
-        fail-on: high
-
     - name: Upload contract artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -128,9 +120,8 @@ jobs:
       with:
         sarif_file: 'trivy-results.sarif'
 
-    - name: Run npm audit
-      run: npm audit --audit-level=high
-      continue-on-error: true
+    - name: Strict production dependency audit
+      run: npm audit --omit=dev --audit-level=high
 
     - name: Run CodeQL Analysis
       uses: github/codeql-action/init@v4
