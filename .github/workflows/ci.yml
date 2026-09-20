@@ -15,7 +15,7 @@ on:
 jobs:
   # Frontend Testing and Linting
   frontend:
-    name: Frontend Tests
+    name: Frontend Quality
     runs-on: ubuntu-latest
 
     strategy:
@@ -33,13 +33,19 @@ jobs:
         cache: 'npm'
 
     - name: Auto-heal and install dependencies
-      run: bash scripts/ci-autoheal.sh
+      run: npm ci --ignore-scripts
+
+    - name: Run lint
+      run: npm run lint
 
     - name: Run type checking
       run: npm run type-check
 
     - name: Run unit tests
       run: npm run test:unit
+
+    - name: Run crypto audit
+      run: npm run audit:crypto
 
     - name: Run build
       run: npm run build
@@ -85,11 +91,9 @@ jobs:
 
     - name: Run Slither security analysis
       uses: crytic/slither-action@v0.3.0
-      continue-on-error: true
       with:
         target: contracts/
         slither-args: --exclude-dependencies --exclude-informational
-        fail-on: none
 
     - name: Run Mythril security analysis
       run: |
@@ -129,7 +133,7 @@ jobs:
 
     - name: Run npm audit
       run: npm audit --audit-level=high
-      continue-on-error: true
+      
 
     - name: Run CodeQL Analysis
       uses: github/codeql-action/init@v4
@@ -153,7 +157,6 @@ jobs:
 
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
-      continue-on-error: true
       with:
         urls: http://localhost:3000
         configPath: ./lighthouserc.json
@@ -221,6 +224,6 @@ jobs:
           **Commit:** ${{ github.sha }}
           **Status:** ${{ (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && 'failed' || 'success' }}
         color: ${{ (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && '0xff0000' || '0x00ff00' }}
-        url: ${{ steps.deploy-conclusion.outputs.url }}
+        url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         username: GitHub Actions
         avatar_url: https://github.com/actions.png
