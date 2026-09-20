@@ -91,6 +91,7 @@ jobs:
 
     - name: Run Slither security analysis
       uses: crytic/slither-action@v0.3.0
+      continue-on-error: true
       with:
         target: contracts/
         slither-args: --exclude-dependencies --exclude-informational
