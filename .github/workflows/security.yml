@@ -155,11 +155,15 @@ jobs:
 
     - name: Check for high severity issues
       run: |
-        if [ -f slither-report.json ]; then
-          high_issues=$(jq '[.results.detectors[]? | select(.impact == "High")] | length' slither-report.json)
-          if [ "$high_issues" -gt 0 ]; then
-            echo "High severity issues found in smart contracts"
-            exit 1
+        if [ ! -f slither-report.json ]; then
+          echo "Slither did not produce a report."
+          exit 1
+        fi
+        high_issues=$(jq '[.results.detectors[]? | select(.impact == "High")] | length' slither-report.json)
+        echo "High-impact findings: $high_issues"
+        if [ "$high_issues" -gt 0 ]; then
+          echo "High severity issues found in smart contracts"
+          exit 1
         fi
 
   license-check:
@@ -177,7 +181,7 @@ jobs:
         cache: 'npm'
 
     - name: Auto-heal and install dependencies
-      run: bash scripts/ci-autoheal.sh
+      run: npm ci --ignore-scripts
 
     - name: Check licenses
       run: |
