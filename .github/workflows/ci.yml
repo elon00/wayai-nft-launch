@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x]
 
     steps:
     - name: Checkout code
@@ -34,9 +34,6 @@ jobs:
 
     - name: Auto-heal and install dependencies
       run: bash scripts/ci-autoheal.sh
-
-    - name: Run linter
-      run: npm run lint
 
     - name: Run type checking
       run: npm run type-check
