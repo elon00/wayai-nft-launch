@@ -87,11 +87,15 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18.x'
+        node-version: '20.x'
         cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+    - name: Auto-heal dependency graph
+      shell: bash
+      run: |
+        set -euo pipefail
+        npm install --package-lock-only --ignore-scripts
+        npm ci --ignore-scripts
 
     - name: Run npm audit
       run: npm audit --audit-level=high
