@@ -358,7 +358,7 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
      * @param amount Amount to withdraw
      */
     function emergencyWithdraw(address token, uint256 amount) external onlyOwner {
-        IERC20(token).transfer(owner(), amount);
+        require(IERC20(token).transfer(owner(), amount), "Transfer failed");
     }
 
     /**
