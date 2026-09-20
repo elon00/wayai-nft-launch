@@ -205,13 +205,14 @@ jobs:
     name: Security Notification
     runs-on: ubuntu-latest
     needs: [dependency-review, codeql-analysis, vulnerability-scan, npm-audit, contract-security, license-check, secrets-scan]
-    if: always() && contains(needs.*.result, 'failure') && secrets.DISCORD_WEBHOOK != ''
+    if: always() && contains(needs.*.result, 'failure')
 
     steps:
     - name: Security Alert
       uses: sarisia/actions-status-discord@v1
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        ack_no_webhook: true
         title: '🚨 Security Issues Detected'
         description: |
           Security checks have failed. Please review the following:
