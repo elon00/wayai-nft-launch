@@ -100,11 +100,11 @@ jobs:
 
     - name: Run npm audit
       run: npm audit --audit-level=high
-      continue-on-error: true
+      
 
     - name: Generate audit report
       run: |
-        npm audit --audit-level=high --json > npm-audit-report.json || true
+        npm audit --audit-level=high --json > npm-audit-report.json
         cat npm-audit-report.json | jq '.metadata.vulnerabilities // {}'
 
     - name: Upload audit report
@@ -139,7 +139,7 @@ jobs:
     - name: Run Slither analysis
       run: |
         slither contracts/ --exclude-dependencies --exclude-informational --json slither-report.json
-      continue-on-error: true
+      
 
     - name: Upload Slither report
       uses: actions/upload-artifact@v4
@@ -151,7 +151,7 @@ jobs:
     - name: Check for high severity issues
       run: |
         if [ -f slither-report.json ]; then
-          high_issues=$(cat slither-report.json | jq '. | length')
+          high_issues=$(jq '[.results.detectors[]? | select(.impact == "High")] | length' slither-report.json)
           if [ "$high_issues" -gt 0 ]; then
             echo "High severity issues found in smart contracts"
             exit 1
