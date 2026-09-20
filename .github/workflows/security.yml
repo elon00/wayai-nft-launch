@@ -93,16 +93,11 @@ jobs:
         node-version: '22.x'
         cache: 'npm'
 
-    - name: Auto-heal dependency graph
-      shell: bash
-      run: |
-        set -euo pipefail
-        npm install --package-lock-only --ignore-scripts
-        npm ci --ignore-scripts
+    - name: Install locked dependencies
+      run: npm ci --ignore-scripts
 
-    - name: Run npm audit
-      run: npm audit --audit-level=high
-      continue-on-error: true
+    - name: Strict production dependency audit
+      run: npm audit --omit=dev --audit-level=high
 
     - name: Generate audit report
       run: |
@@ -140,10 +135,9 @@ jobs:
 
     - name: Run Slither analysis
       run: |
-        slither . --exclude-dependencies --exclude-informational --fail-on none --json slither-report.json || true
-        if [ ! -s slither-report.json ]; then
-          echo '{"results":{"detectors":[]}}' > slither-report.json
-        fi
+        set -euo pipefail
+        slither . --exclude-dependencies --exclude-informational --fail-none --json slither-report.json
+        test -s slither-report.json
 
     - name: Upload Slither report
       uses: actions/upload-artifact@v4
