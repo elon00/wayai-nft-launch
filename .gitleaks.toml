@@ -1,13 +1,11 @@
-title = "Gitleaks Configuration"
+title = "WayAI Gitleaks Configuration"
 
 [allowlist]
-description = "Allowlist test contract addresses, sample keys, and test files"
-paths = [
-  '''scripts/test-contracts\.cjs''',
-  '''scripts/.*''',
-  '''contracts/.*''',
-  '''tests/.*'''
-]
+description = "Only explicitly documented local test fixtures are allowlisted"
+commits = []
+paths = []
 regexes = [
-  '''0x[a-fA-F0-9]{40}'''
+  '''0xa513E6E4b8f2a923D98304ec87F64353C4D5C853''',
+  '''0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6''',
+  '''0x8A791620dd6260079BF849Dc5567aDC3F2FdC318'''
 ]
