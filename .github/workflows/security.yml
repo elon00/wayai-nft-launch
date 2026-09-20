@@ -7,9 +7,10 @@ permissions:
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, master, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, master, develop ]
+  workflow_dispatch:
   schedule:
     # Run weekly security checks on Sundays at 2 AM UTC
     - cron: '0 2 * * 0'

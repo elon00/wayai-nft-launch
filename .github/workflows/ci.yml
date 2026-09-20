@@ -1,10 +1,16 @@
 name: CI/CD Pipeline
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, master, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, master, develop ]
+  workflow_dispatch:
 
 jobs:
   # Frontend Testing and Linting
@@ -119,7 +125,7 @@ jobs:
         output: 'trivy-results.sarif'
 
     - name: Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v4
       if: always()
       with:
         sarif_file: 'trivy-results.sarif'
@@ -128,12 +134,12 @@ jobs:
       run: npm audit --audit-level=high
 
     - name: Run CodeQL Analysis
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v4
       with:
         languages: javascript, typescript
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v4
 
   # Performance Testing
   performance:
