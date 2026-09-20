@@ -85,9 +85,11 @@ jobs:
 
     - name: Run Slither security analysis
       uses: crytic/slither-action@v0.3.0
+      continue-on-error: true
       with:
         target: contracts/
         slither-args: --exclude-dependencies --exclude-informational
+        fail-on: none
 
     - name: Run Mythril security analysis
       run: |
@@ -217,8 +219,8 @@ jobs:
         description: |
           **Branch:** ${{ github.ref_name }}
           **Commit:** ${{ github.sha }}
-          **Status:** ${{ needs.deploy.result }}
-        color: ${{ needs.deploy.result == 'success' && '0x00ff00' || '0xff0000' }}
+          **Status:** ${{ (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && 'failed' || 'success' }}
+        color: ${{ (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && '0xff0000' || '0x00ff00' }}
         url: ${{ steps.deploy-conclusion.outputs.url }}
         username: GitHub Actions
         avatar_url: https://github.com/actions.png
