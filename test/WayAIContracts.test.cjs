@@ -19,7 +19,7 @@ describe("WayAI contracts", function () {
     const nft = await NFT.deploy(
       "WayAI NFT",
       "WNFT",
-      "ipfs://base/",
+      "",
       "ipfs://contract"
     );
     await nft.waitForDeployment();
@@ -76,6 +76,7 @@ describe("WayAI contracts", function () {
     const amount = ethers.parseEther("100");
 
     await token.mint(user.address, amount);
+    await token.mint(await staking.getAddress(), ethers.parseEther("1000"));
     await token.connect(user).approve(await staking.getAddress(), amount);
     await staking.connect(user).stake(amount);
 

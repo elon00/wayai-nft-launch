@@ -89,9 +89,9 @@ fs.writeFileSync('reality/URS_EVIDENCE_CERTIFICATE.json', JSON.stringify(finalCe
 
 const markdownSummary = `# ⚛️ WayAI NFT Platform — Universal Reality Evidence Certificate
 
-**Sealed Timestamp**: \`${finalCertificate.timestamp}\`  
-**Master Reality Hash (SHA-256)**: \`${masterHash}\`  
-**NIST FIPS 204 ML-DSA-65 Cert Signature**:  
+**Sealed Timestamp**: \`${finalCertificate.timestamp}\`
+**Master Reality Hash (SHA-256)**: \`${masterHash}\`
+**NIST FIPS 204 ML-DSA-65 Cert Signature**:
 \`${certSignature.slice(0, 96)}...\`
 
 ---

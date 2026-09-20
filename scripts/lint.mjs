@@ -18,10 +18,19 @@ function walk(dir) {
 function check(file) {
   const source = fs.readFileSync(file, "utf8");
   const lines = source.split(/\r?\n/);
+  const conflictRegex = /^(<{7}|={7}|>{7})(?:\s.*)?$/;
+  let hasConflict = false;
+
   lines.forEach((line, index) => {
-    if (/[ \t]+$/.test(line)) failures.push(`${file}:${index + 1}: trailing whitespace`);
+    if (/[ \t]+$/.test(line)) {
+      failures.push(`${file}:${index + 1}: trailing whitespace`);
+    }
+    if (file !== path.join("scripts", "lint.mjs") && conflictRegex.test(line)) {
+      hasConflict = true;
+    }
   });
-  if (source.includes("<<<<<<<") || source.includes("=======") || source.includes(">>>>>>>")) {
+
+  if (hasConflict) {
     failures.push(`${file}: unresolved merge-conflict marker`);
   }
 }
