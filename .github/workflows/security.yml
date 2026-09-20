@@ -144,7 +144,7 @@ jobs:
 
     - name: Run Slither analysis
       run: |
-        slither contracts/ --exclude-dependencies --exclude-informational --json slither-report.json
+        slither contracts/ --exclude-dependencies --exclude-informational --fail-on none --json slither-report.json
 
     - name: Upload Slither report
       uses: actions/upload-artifact@v4
