@@ -74,7 +74,7 @@ jobs:
         cache: 'npm'
 
     - name: Auto-heal and install dependencies
-      run: bash scripts/ci-autoheal.sh
+      run: npm ci --ignore-scripts
 
     - name: Install Foundry
       uses: foundry-rs/foundry-toolchain@v1
@@ -94,13 +94,6 @@ jobs:
       with:
         target: contracts/
         slither-args: --exclude-dependencies --exclude-informational
-
-    - name: Run Mythril security analysis
-      run: |
-        pip install mythril
-        mythril analyze contracts/ --max-depth 10
-      continue-on-error: true
-
 
     - name: Upload contract artifacts
       uses: actions/upload-artifact@v4
@@ -122,6 +115,8 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
+        severity: 'CRITICAL,HIGH'
+        exit-code: '1'
         format: 'sarif'
         output: 'trivy-results.sarif'
 
@@ -158,7 +153,6 @@ jobs:
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
       with:
-        urls: http://localhost:3000
         configPath: ./lighthouserc.json
         uploadArtifacts: false
         temporaryPublicStorage: true
