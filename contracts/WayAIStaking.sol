@@ -43,9 +43,11 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
     mapping(uint256 => RewardTier) public rewardTiers;
     mapping(address => uint256) public totalStakedByUser;
     mapping(address => uint256) public totalRewardsEarnedByUser;
+    mapping(address => bool) private hasStaked;
 
     uint256 public totalStaked;
     uint256 public totalRewardsDistributed;
+    uint256 public uniqueStakers;
     uint256 public constant REWARD_PRECISION = 1e18;
     uint256 public constant BASIS_POINTS = 10000;
 
@@ -142,6 +144,10 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
 
         totalStaked += amount;
         totalStakedByUser[msg.sender] += amount;
+        if (!hasStaked[msg.sender]) {
+            hasStaked[msg.sender] = true;
+            uniqueStakers += 1;
+        }
 
         emit Staked(msg.sender, amount, tier);
     }
@@ -285,7 +291,7 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
      * @param user User address
      * @param tokenId NFT token ID
      */
-    function addNFTBoost(address user, uint256 tokenId) external {
+    function addNFTBoost(address user, uint256 tokenId) external onlyOwner {
         require(nftContract.ownerOf(tokenId) == user, "User does not own NFT");
         require(stakes[user].isActive, "No active stake");
 
@@ -307,8 +313,8 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
         return (
             totalStaked,
             totalRewardsDistributed,
-            getUniqueStakersCount(),
-            totalStaked / getUniqueStakersCount()
+            uniqueStakers,
+            uniqueStakers == 0 ? 0 : totalStaked / uniqueStakers
         );
     }
 
@@ -316,9 +322,7 @@ contract WayAIStaking is Ownable, ReentrancyGuard {
      * @dev Get unique stakers count (simplified)
      */
     function getUniqueStakersCount() internal view returns (uint256) {
-        // In a real implementation, you'd track unique stakers
-        // For now, return a placeholder
-        return totalStaked / 1000 * 10**18; // Rough estimate
+        return uniqueStakers;
     }
 
     /**
