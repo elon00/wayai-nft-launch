@@ -1,0 +1,2 @@
+# Gitleaks ignore list
+036c7fc6b50c5c87dbd3754d2794e934426f611a:scripts/test-contracts.cjs:generic-api-key:14

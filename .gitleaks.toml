@@ -1,0 +1,13 @@
+title = "Gitleaks Configuration"
+
+[allowlist]
+description = "Allowlist test contract addresses, sample keys, and test files"
+paths = [
+  '''scripts/test-contracts\.cjs''',
+  '''scripts/.*''',
+  '''contracts/.*''',
+  '''tests/.*'''
+]
+regexes = [
+  '''0x[a-fA-F0-9]{40}'''
+]
