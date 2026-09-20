@@ -10,7 +10,7 @@ import {
   verifyPqcSignature,
   encapsulateKEM,
   decapsulateKEM
-} from '../src/utils/pqcCrypto.ts';
+} from '../src/utils/pqcCrypto.js';
 
 test('NIST TIER 1: RFC 5869 HKDF-SHA256 Known Answer Verification', () => {
   const ikm = new Uint8Array(22).fill(0x0b);
