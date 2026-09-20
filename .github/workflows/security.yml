@@ -68,6 +68,8 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'fs'
+        severity: 'CRITICAL,HIGH'
+        exit-code: '1'
         format: 'sarif'
         output: 'trivy-results.sarif'
 
@@ -104,8 +106,12 @@ jobs:
 
     - name: Generate audit report
       run: |
+        set +e
         npm audit --audit-level=high --json > npm-audit-report.json
+        status=$?
+        set -e
         cat npm-audit-report.json | jq '.metadata.vulnerabilities // {}'
+        exit $status
 
     - name: Upload audit report
       uses: actions/upload-artifact@v4
@@ -129,7 +135,7 @@ jobs:
         cache: 'npm'
 
     - name: Auto-heal and install dependencies
-      run: bash scripts/ci-autoheal.sh
+      run: npm ci --ignore-scripts
 
     - name: Install Slither
       run: |
@@ -139,7 +145,6 @@ jobs:
     - name: Run Slither analysis
       run: |
         slither contracts/ --exclude-dependencies --exclude-informational --json slither-report.json
-      
 
     - name: Upload Slither report
       uses: actions/upload-artifact@v4
@@ -155,7 +160,6 @@ jobs:
           if [ "$high_issues" -gt 0 ]; then
             echo "High severity issues found in smart contracts"
             exit 1
-          fi
         fi
 
   license-check:
