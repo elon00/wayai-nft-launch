@@ -8,7 +8,7 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { sha256 } from '@noble/hashes/sha256.js';
-import { ml_dsa65 } from '@noble/post-quantum/ml-dsa.js';
+import { ml_dsa65 } from '@noble/post-quantum/ml-dsa';
 
 console.log('╔══════════════════════════════════════════════════════════════════════════╗');
 console.log('║   WAYAI NFT PLATFORM — URS EVIDENCE CERTIFICATE                          ║');
@@ -34,7 +34,7 @@ run('node tests/nist-pqc.test.mjs', '[1/3] Running Official NIST & Wycheproof Te
 run('node scripts/audit-crypto.mjs', '[2/3] Running Standalone Cryptographic Auditor');
 
 // 3. Universal Reality Engine
-run('tsx scripts/reality-universal.ts', '[3/3] Running Universal Reality Engine');
+run('node scripts/reality-universal.ts', '[3/3] Running Universal Reality Engine');
 
 // Generate Deterministic Root Key for Certificate Signing
 const rootSeed = new Uint8Array(32).fill(0x71);
@@ -75,7 +75,7 @@ const certificatePayload = {
 
 const payloadBytes = Buffer.from(JSON.stringify(certificatePayload, null, 2));
 const masterHash = Buffer.from(sha256(payloadBytes)).toString('hex');
-const certSignature = Buffer.from(ml_dsa65.sign(payloadBytes, certAuthority.secretKey)).toString('hex');
+const certSignature = Buffer.from(ml_dsa65.sign(certAuthority.secretKey, payloadBytes)).toString('hex');
 
 const finalCertificate = {
   ...certificatePayload,

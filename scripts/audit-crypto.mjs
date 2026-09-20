@@ -13,8 +13,8 @@
 import assert from 'node:assert';
 import { hkdf } from '@noble/hashes/hkdf.js';
 import { sha256 } from '@noble/hashes/sha256.js';
-import { ml_kem768 } from '@noble/post-quantum/ml-kem.js';
-import { ml_dsa65 } from '@noble/post-quantum/ml-dsa.js';
+import { ml_kem768 } from '@noble/post-quantum/ml-kem';
+import { ml_dsa65 } from '@noble/post-quantum/ml-dsa';
 
 console.log('=====================================================================');
 console.log('⚡ QMOOSA DEEP TECH AI QUANTUM PLATFORM // STANDALONE CRYPTOGRAPHIC AUDITOR');
@@ -100,30 +100,30 @@ try {
   pass('ML-DSA-65 keygen deterministic from seed');
 
   const msg = Buffer.from('x402 Service Authorization: srv-quantum-ai:0.005_USDC');
-  const sig = ml_dsa65.sign(msg, dsaPair1.secretKey);
+  const sig = ml_dsa65.sign(dsaPair1.secretKey, msg);
   assert.strictEqual(sig.length, 3309);
   pass('ML-DSA-65 signature exact 3,309 bytes');
 
-  const verified = ml_dsa65.verify(sig, msg, dsaPair1.publicKey);
+  const verified = ml_dsa65.verify(dsaPair1.publicKey, msg, sig);
   assert.strictEqual(verified, true);
   pass('ML-DSA-65 genuine signature verified successfully');
 
   console.log('\n▶ [TIER 6] Wycheproof Negative & Adversarial Tests:');
   const tamperedSig = new Uint8Array(sig);
   tamperedSig[42] ^= 0x01;
-  const badSigVer = ml_dsa65.verify(tamperedSig, msg, dsaPair1.publicKey);
+  const badSigVer = ml_dsa65.verify(dsaPair1.publicKey, msg, tamperedSig);
   assert.strictEqual(badSigVer, false);
   pass('Wycheproof: Bit-flipped signature rejected cleanly');
 
   const tamperedMsg = Buffer.from('x402 Service Authorization: srv-quantum-ai:0.005_USDC!');
-  const badMsgVer = ml_dsa65.verify(sig, tamperedMsg, dsaPair1.publicKey);
+  const badMsgVer = ml_dsa65.verify(dsaPair1.publicKey, tamperedMsg, sig);
   assert.strictEqual(badMsgVer, false);
   pass('Wycheproof: Altered message rejected cleanly');
 
   const shortSig = sig.slice(0, 3200);
   let shortSigRejected = false;
   try {
-    shortSigRejected = !ml_dsa65.verify(shortSig, msg, dsaPair1.publicKey);
+    shortSigRejected = !ml_dsa65.verify(dsaPair1.publicKey, msg, shortSig);
   } catch {
     shortSigRejected = true;
   }
@@ -133,7 +133,7 @@ try {
   const badPK = dsaPair1.publicKey.slice(0, 1900);
   let badPKRejected = false;
   try {
-    badPKRejected = !ml_dsa65.verify(sig, msg, badPK);
+    badPKRejected = !ml_dsa65.verify(badPK, msg, sig);
   } catch {
     badPKRejected = true;
   }

@@ -1,8 +1,18 @@
-import { PqcKeyPair } from '../types';
-import { ml_kem768 } from '@noble/post-quantum/ml-kem.js';
-import { ml_dsa65 } from '@noble/post-quantum/ml-dsa.js';
+export interface PqcKeyPair {
+  keyId: string;
+  algorithm: 'ML-KEM-768' | 'ML-DSA-65' | 'Hybrid-Ed25519-Dilithium';
+  publicKey: string;
+  publicKeyFingerprint: string;
+  privateKeyPreview: string;
+  keySizeBits: number;
+  nistSecurityLevel: number;
+  createdAt: string;
+  authorizedForAgent: boolean;
+}
+
+import { ml_kem768 } from '@noble/post-quantum/ml-kem';
+import { ml_dsa65 } from '@noble/post-quantum/ml-dsa';
 import { sha256 } from '@noble/hashes/sha256.js';
-import { hkdf } from '@noble/hashes/hkdf.js';
 
 export function bytesToHex(bytes: Uint8Array): string {
   return Array.from(bytes)
@@ -49,8 +59,8 @@ export function generatePqcKeyPair(
     securityLevel = 3;
   } else {
     // ML-DSA-65 or Hybrid
-    const seedFormatted = seed ? (seed.length === 32 ? seed : seed.slice(0, 32)) : undefined;
-    const pair = seedFormatted ? ml_dsa65.keygen(seedFormatted) : ml_dsa65.keygen();
+    const seedFormatted = seed ? (seed.length === 32 ? seed : seed.slice(0, 32)) : crypto.getRandomValues(new Uint8Array(32));
+    const pair = ml_dsa65.keygen(seedFormatted);
     pubBytes = pair.publicKey;
     secBytes = pair.secretKey;
     keySizeBits = 1952 * 8; // 15,616 bits
@@ -121,13 +131,13 @@ export function createPqcHybridSignature(
   let dsaSigHex = '';
 
   if (stored) {
-    const sig = ml_dsa65.sign(messageBytes, stored.secretKey);
+    const sig = ml_dsa65.sign(stored.secretKey, messageBytes);
     dsaSigHex = bytesToHex(sig);
   } else {
     // Deterministic fallback signing key derived from fingerprint
     const seed = sha256(encoder.encode(keyPair.publicKeyFingerprint));
     const fallbackPair = ml_dsa65.keygen(seed);
-    const sig = ml_dsa65.sign(messageBytes, fallbackPair.secretKey);
+    const sig = ml_dsa65.sign(fallbackPair.secretKey, messageBytes);
     dsaSigHex = bytesToHex(sig);
   }
 
@@ -169,7 +179,7 @@ export function verifyPqcSignature(
     }
 
     if (sigBytes && sigBytes.length === 3309 && publicKey.length === 3904) {
-      isValid = ml_dsa65.verify(sigBytes, messageBytes, hexToBytes(publicKey));
+      isValid = ml_dsa65.verify(hexToBytes(publicKey), messageBytes, sigBytes);
     } else if (signature.startsWith('PQC-HYBRID-x402.')) {
       const parts = signature.split('.');
       if (parts.length === 3) {
@@ -204,11 +214,11 @@ export function signPqcMessage(keyId: string, message: string): { signature: str
   const messageBytes = encoder.encode(message);
   let sigBytes: Uint8Array;
   if (stored) {
-    sigBytes = ml_dsa65.sign(messageBytes, stored.secretKey);
+    sigBytes = ml_dsa65.sign(stored.secretKey, messageBytes);
   } else {
     const seed = sha256(encoder.encode(keyId));
     const pair = ml_dsa65.keygen(seed);
-    sigBytes = ml_dsa65.sign(messageBytes, pair.secretKey);
+    sigBytes = ml_dsa65.sign(pair.secretKey, messageBytes);
   }
   return {
     signature: '0xpqc_mldsa65_' + bytesToHex(sigBytes),
@@ -222,9 +232,8 @@ export function verifyPqcMessage(signatureHex: string, message: string, publicKe
     const sigBytes = hexToBytes(rawSigHex);
     const pubBytes = hexToBytes(publicKeyHex.replace(/^0x/, ''));
     const messageBytes = new TextEncoder().encode(message);
-    return ml_dsa65.verify(sigBytes, messageBytes, pubBytes);
+    return ml_dsa65.verify(pubBytes, messageBytes, sigBytes);
   } catch {
     return false;
   }
 }
-

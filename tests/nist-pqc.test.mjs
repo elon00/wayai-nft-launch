@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { hkdf } from '@noble/hashes/hkdf.js';
 import { sha256 } from '@noble/hashes/sha256.js';
-import { ml_kem768 } from '@noble/post-quantum/ml-kem.js';
-import { ml_dsa65 } from '@noble/post-quantum/ml-dsa.js';
+import { ml_kem768 } from '@noble/post-quantum/ml-kem';
+import { ml_dsa65 } from '@noble/post-quantum/ml-dsa';
 import {
   generatePqcKeyPair,
   createPqcHybridSignature,
   verifyPqcSignature,
   encapsulateKEM,
   decapsulateKEM
-} from '../src/utils/pqcCrypto.js';
+} from '../src/utils/pqcCrypto.ts';
 
 test('NIST TIER 1: RFC 5869 HKDF-SHA256 Known Answer Verification', () => {
   const ikm = new Uint8Array(22).fill(0x0b);
