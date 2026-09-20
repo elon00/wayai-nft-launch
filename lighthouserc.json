@@ -1,9 +1,9 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run dev",
+      "startServerCommand": "npm run build && npm run preview -- --host 0.0.0.0 --port 4173",
       "startServerReadyPattern": "Local:",
-      "url": ["http://localhost:3000/"]
+      "url": ["http://localhost:4173/"]
     },
     "assert": {
       "assertions": {
