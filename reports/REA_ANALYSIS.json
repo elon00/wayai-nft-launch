@@ -1,0 +1,215 @@
+{
+  "engine": "REA_Reverse_Engineer_Anything",
+  "status": "STRUCTURE_RECONSTRUCTED",
+  "analyzed_files": 69,
+  "manifest": {
+    "components.json": {
+      "bytes": 486
+    },
+    "CONTRIBUTING.md": {
+      "bytes": 11477
+    },
+    "hardhat.config.cjs": {
+      "bytes": 1944
+    },
+    "index.html": {
+      "bytes": 630
+    },
+    "lighthouserc.json": {
+      "bytes": 419
+    },
+    "netlify.toml": {
+      "bytes": 724
+    },
+    "package-lock.json": {
+      "bytes": 318405
+    },
+    "package.json": {
+      "bytes": 2565
+    },
+    "postcss.config.cjs": {
+      "bytes": 86
+    },
+    "README.md": {
+      "bytes": 13190
+    },
+    "REALITY_MANIFEST.json": {
+      "bytes": 1329
+    },
+    "tailwind.config.cjs": {
+      "bytes": 2273
+    },
+    "tsconfig.json": {
+      "bytes": 589
+    },
+    "tsconfig.node.json": {
+      "bytes": 221
+    },
+    "vercel.json": {
+      "bytes": 882
+    },
+    "vite.config.ts": {
+      "bytes": 391
+    },
+    ".github\\codeql-config.yml": {
+      "bytes": 105
+    },
+    ".github\\dependabot.yml": {
+      "bytes": 1556
+    },
+    "contracts\\WayAINFT.sol": {
+      "bytes": 10898
+    },
+    "contracts\\WayAIStaking.sol": {
+      "bytes": 13376
+    },
+    "contracts\\WayAIToken.sol": {
+      "bytes": 11323
+    },
+    "reality\\URS_EVIDENCE_CERTIFICATE.json": {
+      "bytes": 11589
+    },
+    "reality\\URS_EVIDENCE_CERTIFICATE.md": {
+      "bytes": 2398
+    },
+    "reality\\URS_SCORECARD.json": {
+      "bytes": 2454
+    },
+    "scripts\\audit-crypto.mjs": {
+      "bytes": 7190
+    },
+    "scripts\\ci-autoheal.sh": {
+      "bytes": 715
+    },
+    "scripts\\deploy.cjs": {
+      "bytes": 6766
+    },
+    "scripts\\deploy.js": {
+      "bytes": 0
+    },
+    "scripts\\generate-urs-certificate.ts": {
+      "bytes": 6221
+    },
+    "scripts\\lint.mjs": {
+      "bytes": 1362
+    },
+    "scripts\\reality-universal.ts": {
+      "bytes": 15828
+    },
+    "scripts\\rea_inspector.py": {
+      "bytes": 1485
+    },
+    "scripts\\request-faucet.js": {
+      "bytes": 5611
+    },
+    "scripts\\rsi_engine.py": {
+      "bytes": 2039
+    },
+    "scripts\\setup-testnet.cjs": {
+      "bytes": 3408
+    },
+    "scripts\\setup-testnet.js": {
+      "bytes": 3408
+    },
+    "scripts\\test-contracts.cjs": {
+      "bytes": 5213
+    },
+    "src\\App.tsx": {
+      "bytes": 121
+    },
+    "src\\index.css": {
+      "bytes": 3355
+    },
+    "src\\main.tsx": {
+      "bytes": 244
+    },
+    "src\\vite-env.d.ts": {
+      "bytes": 83
+    },
+    "test\\WayAIContracts.test.cjs": {
+      "bytes": 4326
+    },
+    "tests\\nist-pqc.test.mjs": {
+      "bytes": 4362
+    },
+    "tests\\reality_check_harness.py": {
+      "bytes": 1250
+    },
+    ".github\\workflows\\autoheal.yml": {
+      "bytes": 1306
+    },
+    ".github\\workflows\\ci.yml": {
+      "bytes": 5778
+    },
+    ".github\\workflows\\qmoosa-rsi-rea-sync.yml": {
+      "bytes": 531
+    },
+    ".github\\workflows\\release.yml": {
+      "bytes": 3696
+    },
+    ".github\\workflows\\security.yml": {
+      "bytes": 6210
+    },
+    "src\\components\\AIAgentDashboard.tsx": {
+      "bytes": 13295
+    },
+    "src\\components\\LandingPage.tsx": {
+      "bytes": 5677
+    },
+    "src\\components\\WalletConnector.tsx": {
+      "bytes": 7714
+    },
+    "src\\hooks\\useBlockchain.ts": {
+      "bytes": 5125
+    },
+    "src\\lib\\aiAgents.ts": {
+      "bytes": 12695
+    },
+    "src\\lib\\blockchain.ts": {
+      "bytes": 17501
+    },
+    "src\\lib\\faucet.ts": {
+      "bytes": 3438
+    },
+    "src\\lib\\networks.ts": {
+      "bytes": 6299
+    },
+    "src\\lib\\pqcCrypto.js": {
+      "bytes": 6908
+    },
+    "src\\lib\\pqcCrypto.ts": {
+      "bytes": 8001
+    },
+    "src\\lib\\utils.ts": {
+      "bytes": 13518
+    },
+    "src\\types\\blockchain.ts": {
+      "bytes": 6962
+    },
+    "src\\types\\index.ts": {
+      "bytes": 84
+    },
+    "src\\utils\\pqcCrypto.js": {
+      "bytes": 6908
+    },
+    "src\\utils\\pqcCrypto.ts": {
+      "bytes": 7999
+    },
+    "src\\components\\ui\\badge.tsx": {
+      "bytes": 1176
+    },
+    "src\\components\\ui\\button.tsx": {
+      "bytes": 1959
+    },
+    "src\\components\\ui\\card.tsx": {
+      "bytes": 1904
+    },
+    "src\\components\\ui\\input.tsx": {
+      "bytes": 790
+    },
+    "src\\components\\ui\\progress.tsx": {
+      "bytes": 804
+    }
+  },
+  "timestamp": 1794065135
+}
