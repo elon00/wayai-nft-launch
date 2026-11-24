@@ -232,3 +232,5 @@ Icon
 
 # Project specific
 # Add any project-specific files that should be ignored
+# Lean 4 build artifacts
+lean_verify/.lake/
